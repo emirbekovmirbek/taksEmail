@@ -1,28 +1,52 @@
 .autocomplete {
-    max-width: 1200px;
+    max-width: 1230px;
+    padding: 0 15px;
     width: 100%;
     margin: 0 auto;
-    position: relative;
     height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.title {
+    font-size: 30px;
+    line-height: 35px;
+    font-weight: 600;
+    margin-bottom: 70px;
+    text-align: center;
 }
 .autocomplete__form {
+    max-width:  400px;
+
     width: 100%;
+    margin: 0 auto;
+}
+.autocomplete__form > div{
+    position: relative;
+    width: 100%;
+
+
 }
 .email {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background: #e6e6e6;
     width: inherit;
-    background: #ffffff;
     outline: none;
-    padding: 10px 20px;
+    padding: 15px 20px;
     font-size: 20px;
     line-height: 20px;
     font-weight: normal;
-    border: 1px solid gray;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
 }
+.email:focus{
+    border: 1px solid #827ffe;
+
+}
+
 .domains {
     position: absolute;
     left: 0;
-    top:45px;
+    top: 50px;
     width: inherit;
     list-style: none;
     background: #ffffff;
@@ -31,7 +55,8 @@
     height: auto;
     overflow: auto;
 }
-.domain{
+
+.domain {
     width: inherit;
     font-size: 20px;
     padding: 10px 10px;
@@ -40,7 +65,29 @@
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
     transition: all 0.4s;
 }
-.domain:hover{
+
+.domain:hover {
     background: rgb(180, 180, 180);
     cursor: pointer;
+}
+
+.btn {
+    width: 100%;
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    border: none;
+    color: #ffffff;
+    background: #827ffe;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all .5s;
+}
+.btn:hover{
+    background: rgba(22, 57, 208, 0.96);
 }
