@@ -1,0 +1,46 @@
+.autocomplete {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    height: 100vh;
+}
+.autocomplete__form {
+    width: 100%;
+}
+.email {
+    width: inherit;
+    background: #ffffff;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: normal;
+    border: 1px solid gray;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+}
+.domains {
+    position: absolute;
+    left: 0;
+    top:45px;
+    width: inherit;
+    list-style: none;
+    background: #ffffff;
+    z-index: 34;
+    max-height: 240px;
+    height: auto;
+    overflow: auto;
+}
+.domain{
+    width: inherit;
+    font-size: 20px;
+    padding: 10px 10px;
+    line-height: 20px;
+    font-weight: normal;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s;
+}
+.domain:hover{
+    background: rgb(180, 180, 180);
+    cursor: pointer;
+}
