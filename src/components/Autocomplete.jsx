@@ -102,7 +102,7 @@ const Autocomplete = () => {
                         })}
                     </ul>
                 </div>
-                <button className={css.btn}>Проверить почту</button>
+                <button className={css.btn} type="submit">Проверить почту</button>
             </form>
             <Alerts
                 alerts={alerts}
