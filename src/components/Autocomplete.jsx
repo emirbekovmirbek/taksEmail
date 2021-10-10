@@ -4,6 +4,8 @@ import Alerts from "./Alert";
 import axios from "axios";
 
 const Autocomplete = () => {
+    //
+    const [pending, setPending] = React.useState(false)
     //  Value - значение инпута
     const [value, setValue] = React.useState("");
     // isOpen - флаг для визуалиции автокомлита
@@ -45,7 +47,7 @@ const Autocomplete = () => {
         setValue(e.target.textContent);
         setIsOpen(false);
     }
-    // submitHandler - фунция
+    // submitHandler - фунция проверки почты
     const submitHandler = (e) => {
         e.preventDefault();
         if (!value.trim()) {
@@ -57,8 +59,11 @@ const Autocomplete = () => {
                 return {...old, error: "Некоректная почта"}
             });
         } else {
+            setPending(true)
             axios.get(`https://api.kickbox.com/v2/verify?email=${value}&apikey=live_d5bf2cc04a0c24efcc7056727f487e08aff43981a575ac7ba55aadb3be5aecec`)
                 .then((res) => {
+                    console.log(res.data)
+
                     if (res.status === 200) {
                         if (res.data.result === "deliverable") {
                             setAlerts({ success: "Почта существует", error: ""});
@@ -68,14 +73,27 @@ const Autocomplete = () => {
                     }
 
                 })
-                .catch(() => {
-
+                .catch((error) => {
+                    setAlerts({success: "", error: "Сервер для проверки почты недоступен попробуйте позже"})
+                })
+                .finally(() => {
+                    setPending(false)
                 })
         }
 
     }
+// controlViewAut - фунция скрытия и визуалиции автокомлита
+    const controlViewAut = (e) => {
+        if(e.target.nodeName === "INPUT"){
+            setIsOpen(true)
+        }else {
+            setIsOpen(false);
+
+        }
+    }
+    if(pending) return <img className='pending'  src="/img/pending.gif" alt="Loading"/>
     return (
-        <div className={css.autocomplete}>
+        <div className={css.autocomplete} onClick={controlViewAut}>
             <form className={css.autocomplete__form} onSubmit={submitHandler}>
                 <h1 className={css.title}>Проверка почты</h1>
                 <div>
@@ -87,9 +105,7 @@ const Autocomplete = () => {
                            onClick={() => setIsOpen(true)}
                            style={{boxShadow: alerts.error ? "0px 2px 8px 2px rgba(255,31,11,0.45)" : "none"}}
                     />
-                    <ul className={css.domains} onMouseLeave={() => {
-                        setIsOpen(false)
-                    }}>
+                    <ul className={css.domains}>
                         {(value.indexOf("@") !== -1 && isOpen) && domains.filter((option) => {
                             const inputDomain = value.split("@")[1];
                             return checkingDomain(inputDomain, option);
