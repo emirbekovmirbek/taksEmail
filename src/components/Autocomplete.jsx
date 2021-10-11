@@ -51,13 +51,9 @@ const Autocomplete = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         if (!value.trim()) {
-            setAlerts((old) => {
-                return {...old, error: "Поле не может быть пустым"}
-            });
+            setAlerts( {success: "", error: "Поле не может быть пустым"});
         } else if (!emailValidation.test(value.toLowerCase())) {
-            setAlerts((old) => {
-                return {...old, error: "Некоректная почта"}
-            });
+            setAlerts({success: "", error: "Некоректная почта"});
         } else {
             setPending(true)
             axios.get(`https://api.kickbox.com/v2/verify?email=${value}&apikey=live_d5bf2cc04a0c24efcc7056727f487e08aff43981a575ac7ba55aadb3be5aecec`)
@@ -73,7 +69,7 @@ const Autocomplete = () => {
                     }
 
                 })
-                .catch((error) => {
+                .catch(() => {
                     setAlerts({success: "", error: "Сервер для проверки почты недоступен попробуйте позже"})
                 })
                 .finally(() => {
